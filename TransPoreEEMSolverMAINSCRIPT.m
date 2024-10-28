@@ -10,9 +10,25 @@ ITime = tic;
 
 % Change from QST1.mat - QST6.mat
 MeshStrCell = {'QST3.mat'};
+% Build mesh
+% Define offests
+% These are the offsets for the board, note that the rotation axis are
+% centred at 0 so we need to counteract that with a translation eithqdel er
+% one of the two other directions.
+MidOffset = [0 0.065/2 -0.065/2];
+% MidOffset = [-0.04/2 0.040/2 0];
+BotOffset = [0 0.045/2 0.045/2];
+EWPOffset = [MidOffset; BotOffset];
 
-
+% Rotations are in radians and are clockwise about each axis
+% centered at X/Y/Z = 0
+MidRotation = [0.5 0.5 0.5]*pi; % clockwise rotation about % Y axis
+% MidRotation = [0 0 0.5]*pi; % clockwise rotation about % Y axis
+BotRotation = [0 0 0];
+EWPRotation = [MidRotation; BotRotation];
 UpdateMesh = 1;
+
+
 if exist('EWPMesh','var') == 0 || UpdateMesh == 1
     [EWPMesh] = OverlappingSurfacePoints(MeshStrCell,EWPOffset,EWPRotation);
 end
@@ -51,22 +67,6 @@ SatParamArray = 1;%(logspace(-4,-2,12));
 %        mkdir(DirStr)
 % end
 
-%% Build mesh
-% Define offests
-% These are the offsets for the board, note that the rotation axis are
-% centred at 0 so we need to counteract that with a translation eithqdel er
-% one of the two other directions.
-MidOffset = [0 0.065/2 -0.065/2];
-% MidOffset = [-0.04/2 0.040/2 0];
-BotOffset = [0 0.045/2 0.045/2];
-EWPOffset = [MidOffset; BotOffset];
-
-% Rotations are in radians and are clockwise about each axis
-% centered at X/Y/Z = 0
-MidRotation = [0.5 0.5 0.5]*pi; % clockwise rotation about % Y axis
-% MidRotation = [0 0 0.5]*pi; % clockwise rotation about % Y axis
-BotRotation = [0 0 0];
-EWPRotation = [MidRotation; BotRotation];
 
 
 %
