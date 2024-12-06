@@ -4,12 +4,13 @@
 % we've generated.
 % clear all
 clearvars -except JobCounter
+JobCounter = 1;
 ITime = tic;
 
 
 
 % Change from QST1.mat - QST6.mat
-MeshStrCell = {'QST3.mat'};
+MeshStrCell = {'QST2.mat'};
 % Build mesh
 % Define offests
 % These are the offsets for the board, note that the rotation axis are
@@ -35,9 +36,9 @@ end
 
 
 % 1 for mex (function will need to be built if it is not already)
-EWPMesh.UseMex = 1;
+EWPMesh.UseMex = 0;
 BTime = tic;
-Bounded = 1; % unbounded (infxtypeof) = 0, bounded = 1
+Bounded = 0; % unbounded (inf) = 0, bounded = 1
 if EWPMesh.UseMex == 1
     fprintf('Building Mex file for the element loop!\n')
     BuildFVMElementLoop(EWPMesh,Bounded)
@@ -46,7 +47,7 @@ BTime = toc(BTime);
 
 
 ConsolePrint = 1; % display in command window progress
-PlottingInterval = 10; % When to update the plot
+PlottingInterval = 1e6; % When to update the plot
 
 %% Stuff for parameter fitting not important rn
 bdiff = linspace(40,250,16); % Diff

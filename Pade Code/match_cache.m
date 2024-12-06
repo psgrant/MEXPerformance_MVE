@@ -1,0 +1,6 @@
+function b = match_cache(p, z, nrm_z, siz, atol, rtol)
+b = all(p.siz == siz)                 && ...
+    flteq(p.nrm_z, nrm_z, atol, rtol) && ...
+    flteq(p.z, z, atol, rtol);
+
+end
